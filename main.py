@@ -18,7 +18,6 @@ selection = 0
 TODO:
     - test for amount to be a decimal
     - test for amount to be a positive number
-    
 '''
 
 
@@ -64,6 +63,14 @@ def cvs_analyze():
                                for n in range(0, len(mykeys))})
     expenses.append(expense)
 
+
+'''
+TODO:
+    - print the expenses in a formatted way
+    - print the expenses and totals by category
+    - print the total expenses
+    - print the difference between the total and the expenses
+'''
 
 while selection == 0:
     option_1 = 'Enter 1 to add expense details'
