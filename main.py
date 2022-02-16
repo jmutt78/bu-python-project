@@ -32,11 +32,7 @@ def gather_exp():
 
 '''
 TODO:
-    - get the file name from the user input 
-    - check if the file exists
-    - if the file exists, load the data from the file.
-    - if the file does not exist, or after the data is loaded, prompt the user.
-    - remove any expenses that are not a postie number
+    - error any expenses that are not a positive number
 '''
 
 
@@ -58,6 +54,7 @@ def cvs_analyze():
             else:
                 #  load the data from the csv file
                 expenses.extend(csv_dict)
+                file_in.close()
                 print('Success! Your expenses have been loaded.')
     else:
         print('Error: File path is not valid')
