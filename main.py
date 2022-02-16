@@ -1,11 +1,4 @@
-
-# add all the expenses, and store the total as a variable
-# store the difference of the total and the expenses
-# write them in a file and also print them in a formatted way to the console.
-
-# give them a breakdown for their expenses in each category
-# give them a breakdown of in a list of expenses
-
+from cmath import log
 from decimal import Decimal
 import csv
 
@@ -50,7 +43,6 @@ TODO:
 
 def cvs_analyze():
     global expenses
-    expense = []
     with open("test.csv", mode='r', encoding='utf-8-sig') as myfile:
         firstline = True
         for line in myfile:
@@ -59,28 +51,46 @@ def cvs_analyze():
                 firstline = False
             else:
                 values = "".join(line.split()).split(',')
-                expense.append({mykeys[n]: values[n]
-                               for n in range(0, len(mykeys))})
-    expenses.append(expense)
+                print(values)
+                expenses.append({mykeys[n]: values[n]
+                                 for n in range(0, len(mykeys))})
 
 
 '''
 TODO:
-    - print the expenses in a formatted way
-    - print the expenses and totals by category
-    - print the total expenses
-    - print the difference between the total and the expenses
+    - the expenses and totals by category
+    - the total expenses
+    - the difference between the total and the expenses
 '''
+
+
+def analyze_expenses():
+    global expenses
+    if(len(expenses)):
+        csv_columns = ['category', 'name', 'amount']
+        expense_file = open("expense_list.csv", "w")
+        dict_writer = csv.DictWriter(expense_file, csv_columns)
+        dict_writer.writeheader()
+        dict_writer.writerows(expenses)
+        expense_file.close()
+
+    else:
+        print("No expenses to analyze")
+
 
 while selection == 0:
     option_1 = 'Enter 1 to add expense details'
     option_2 = 'Enter 2 to upload a cvs file'
-    option_3 = 'Enter 3 to exit'
-    message = int(input(f"{option_1}\n{option_2}\n{option_3}\n --> "))
+    option_3 = 'Enter 3 to analyze the expenses'
+    option_4 = 'Enter 4 to exit'
+    message = int(
+        input(f"{option_1}\n{option_2}\n{option_3}\n{option_4}\n --------> "))
 
     if message == 1:
         gather_exp()
     elif message == 2:
         cvs_analyze()
+    elif message == 3:
+        analyze_expenses()
     else:
         break
