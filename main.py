@@ -1,6 +1,7 @@
 from cmath import log
 from decimal import Decimal
 import csv
+import os
 
 expenses = []
 output_file = []
@@ -34,26 +35,32 @@ TODO:
     - get the file name from the user input 
     - check if the file exists
     - if the file exists, load the data from the file.
-    - test the data for name, category, amount.
-    - if it is missing one of them, throw an error with what's missing.
     - if the file does not exist, or after the data is loaded, prompt the user.
-    - remove any expenses that are not a postive number
+    - remove any expenses that are not a postie number
 '''
 
 
 def cvs_analyze():
     global expenses
-    with open("test.csv", mode='r', encoding='utf-8-sig') as myfile:
-        firstline = True
-        for line in myfile:
-            if firstline:
-                mykeys = "".join(line.split()).split(',')
-                firstline = False
+    filepath = input("Please enter filepath: ")
+    # check if file exist and throw an error if it does not
+    if(os.path.exists(filepath)):
+        with open(filepath, mode='r', encoding='utf-8-sig') as file_in:
+            csv_columns = ['category', 'name', 'amount']
+            reader = csv.DictReader(file_in)
+            csv_dict = list(reader)
+            headers = reader.fieldnames
+            #  check that the csv file is in the correct format
+            if sorted(headers) != sorted(csv_columns):
+                print(
+                    "Error: Your CSV file is not in the correct format. it must contain 'category', 'name', 'amount'")
+
             else:
-                values = "".join(line.split()).split(',')
-                print(values)
-                expenses.append({mykeys[n]: values[n]
-                                 for n in range(0, len(mykeys))})
+                #  load the data from the csv file
+                expenses.extend(csv_dict)
+                print('Success! Your expenses have been loaded.')
+    else:
+        print('Error: File path is not valid')
 
 
 '''
@@ -67,7 +74,7 @@ TODO:
 def analyze_expenses():
     global expenses
     if(len(expenses)):
-        csv_columns = ['category', 'name', 'amount']
+        csv_columns = {'category', 'name', 'amount'}
         expense_file = open("expense_list.csv", "w")
         dict_writer = csv.DictWriter(expense_file, csv_columns)
         dict_writer.writeheader()
