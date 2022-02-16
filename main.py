@@ -8,19 +8,23 @@ output_file = []
 selection = 0
 # income = Decimal(input('Please enter your monthly income -->'))
 
-'''
-TODO:
-    - test for amount to be a decimal
-    - test for amount to be a positive number
-'''
-
 
 def gather_exp():
     global expenses
     while True:
         expense_name = input('Enter the expense name -->')
         expense_category = input('Enter the expense category -->')
-        expense_amount = input('Enter the expense amount -->')
+        goodinput = False
+        while not goodinput:
+            try:
+                expense_amount = int(input('Enter the expense amount -->'))
+                if expense_amount > 0:
+                    goodinput = True
+                    print("Success! Your expenses have been loaded")
+                else:
+                    print("that's not a positive number. Try again: ")
+            except ValueError:
+                print("that's not an integer. Try again: ")
         expense = {'name': expense_name,
                    'category': expense_category, 'amount': expense_amount}
         expenses.append(expense)
@@ -98,3 +102,12 @@ while selection == 0:
         analyze_expenses()
     else:
         break
+
+
+'''
+TODO:
+    - Migrate to OOP and use inheritance
+    - Add a method to calculate the total expenses
+    - Add a method to calculate the difference between the total and the expenses
+    - Create Unit Tests
+'''
