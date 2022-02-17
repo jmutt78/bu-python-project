@@ -114,13 +114,20 @@ def analyze_expenses():
         print("No expenses to analyze")
 
 
+def reset():
+    global expenses
+    expenses = []
+    print("Success! Your expenses have been reset.")
+
+
 while selection == 0:
     option_1 = 'Enter 1 to add expense details'
     option_2 = 'Enter 2 to upload a cvs file'
     option_3 = 'Enter 3 to analyze the expenses'
-    option_4 = 'Enter 4 to exit'
+    option_4 = 'Enter 4 to reset the expenses'
+    option_5 = 'Enter 5 to exit'
     message = int(
-        input(f"{option_1}\n{option_2}\n{option_3}\n{option_4}\nPlease select an option: "))
+        input(f"{option_1}\n{option_2}\n{option_3}\n{option_4}\n{option_5}\n\nPlease select an option: "))
 
     if message == 1:
         gather_exp()
@@ -128,6 +135,8 @@ while selection == 0:
         cvs_analyze()
     elif message == 3:
         analyze_expenses()
+    elif message == 4:
+        reset()
     else:
         break
 
@@ -136,4 +145,6 @@ while selection == 0:
 TODO:
     - Migrate to OOP and use inheritance
     - Create Unit Tests
+    - Document code
+
 '''
