@@ -50,21 +50,20 @@ def cvs_analyze():
                 for i in csv_dict:
                     i["amount"] = int(i["amount"])
                     if(i["amount"] < 0):
-                        print('not a positive number. Try again:')
-                        raise
-                    else:
-                        continue
+                        raise ValueError
                 if sorted(headers) != sorted(csv_columns):
-                    print(
-                        "Error: Your CSV file is not in the correct format. it must contain 'category', 'name', 'amount'")
-                    raise
+                    raise KeyError
             except ValueError:
                 print("Could not convert data to an integer.")
-                raise
-        #  load the data from the csv file
-        expenses.extend(csv_dict)
-        file_in.close()
-        print('Success! Your expenses have been loaded.')
+                file_in.close()
+            except KeyError:
+                print(
+                    "Error: Your CSV file is not in the correct format. it must contain 'category', 'name', 'amount'")
+                file_in.close()
+            else:
+                expenses.extend(csv_dict)
+                file_in.close()
+                print('Success! Your expenses have been loaded.')
     else:
         print('Error: File path is not valid')
 
