@@ -1,13 +1,12 @@
-from cmath import log
-from decimal import Decimal
+
 import csv
 import os
-import sys
+
 
 expenses = []
 output_file = []
 selection = 0
-# income = Decimal(input('Please enter your monthly income -->'))
+income = int(input('Please enter your monthly income -->'))
 
 
 def gather_exp():
@@ -68,23 +67,44 @@ def cvs_analyze():
         print('Error: File path is not valid')
 
 
-'''
-TODO:
-    - the expenses and totals by category
-    - the total expenses
-    - the difference between the total and the expenses
-'''
-
-
 def analyze_expenses():
-    global expenses
     if(len(expenses)):
+        # create a dictionary of categories and the total amount
+        total_by_category = {}
+        for i in expenses:
+            if i["category"] not in total_by_category:
+                total_by_category[i["category"]] = i["amount"]
+            else:
+                total_by_category[i["category"]] += i["amount"]
+        # total all expenses
+        total_expenses = 0
+        for i in expenses:
+            total_expenses += i["amount"]
+        # calculate the difference between the total and the expenses
+        expense_difference = income - total_expenses
+
+        # create a file of all expenses
         csv_columns = {'category', 'name', 'amount'}
         expense_file = open("expense_list.csv", "w")
         dict_writer = csv.DictWriter(expense_file, csv_columns)
         dict_writer.writeheader()
         dict_writer.writerows(expenses)
+
+        print(total_by_category)
+
+        # csv_columns = {'category', 'amount'}
+        # # # create a file of the total by category
+        # total_by_category_file = open("total_by_category.csv", "w")
+        # dict_writer = csv.DictWriter(total_by_category_file, csv_columns)
+
+        # # create a file of the difference
+        # expense_difference_file = open("expense_difference.csv", "w")
+        # dict_writer = csv.DictWriter(expense_difference_file)
+        # dict_writer.writeheader()
+
         expense_file.close()
+        # total_by_category_file.close()
+        # expense_difference_file.close()
 
     else:
         print("No expenses to analyze")
@@ -110,6 +130,7 @@ while selection == 0:
 
 '''
 TODO:
+    - write to csv file
     - Migrate to OOP and use inheritance
     - Add a method to calculate the total expenses
     - Add a method to calculate the difference between the total and the expenses
