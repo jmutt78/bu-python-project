@@ -120,7 +120,7 @@ while selection == 0:
     option_3 = 'Enter 3 to analyze the expenses'
     option_4 = 'Enter 4 to exit'
     message = int(
-        input(f"{option_1}\n{option_2}\n{option_3}\n{option_4}\n --------> "))
+        input(f"{option_1}\n{option_2}\n{option_3}\n{option_4}\nPlease select an option: "))
 
     if message == 1:
         gather_exp()
