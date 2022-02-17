@@ -2,6 +2,7 @@ from cmath import log
 from decimal import Decimal
 import csv
 import os
+import sys
 
 expenses = []
 output_file = []
@@ -14,17 +15,18 @@ def gather_exp():
     while True:
         expense_name = input('Enter the expense name -->')
         expense_category = input('Enter the expense category -->')
-        goodinput = False
-        while not goodinput:
+        test_input = False
+        while not test_input:
             try:
                 expense_amount = int(input('Enter the expense amount -->'))
                 if expense_amount > 0:
-                    goodinput = True
+                    test_input = True
                     print("Success! Your expenses have been loaded")
                 else:
                     print("that's not a positive number. Try again: ")
             except ValueError:
                 print("that's not an integer. Try again: ")
+                break
         expense = {'name': expense_name,
                    'category': expense_category, 'amount': expense_amount}
         expenses.append(expense)
@@ -32,12 +34,6 @@ def gather_exp():
             input('Enter 1 to add more expenses or 0 to exit -->'))
         if choice == 0:
             break
-
-
-'''
-TODO:
-    - error any expenses that are not a positive number
-'''
 
 
 def cvs_analyze():
@@ -50,16 +46,25 @@ def cvs_analyze():
             reader = csv.DictReader(file_in)
             csv_dict = list(reader)
             headers = reader.fieldnames
-            #  check that the csv file is in the correct format
-            if sorted(headers) != sorted(csv_columns):
-                print(
-                    "Error: Your CSV file is not in the correct format. it must contain 'category', 'name', 'amount'")
-
-            else:
-                #  load the data from the csv file
-                expenses.extend(csv_dict)
-                file_in.close()
-                print('Success! Your expenses have been loaded.')
+            try:
+                for i in csv_dict:
+                    i["amount"] = int(i["amount"])
+                    if(i["amount"] < 0):
+                        print('not a positive number. Try again:')
+                        raise
+                    else:
+                        continue
+                if sorted(headers) != sorted(csv_columns):
+                    print(
+                        "Error: Your CSV file is not in the correct format. it must contain 'category', 'name', 'amount'")
+                    raise
+            except ValueError:
+                print("Could not convert data to an integer.")
+                raise
+        #  load the data from the csv file
+        expenses.extend(csv_dict)
+        file_in.close()
+        print('Success! Your expenses have been loaded.')
     else:
         print('Error: File path is not valid')
 
