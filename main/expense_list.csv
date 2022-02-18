@@ -1,4 +1,4 @@
-category,name,amount
-monthly dues,test2,1500
-Auto,test3,100
-Auto,test3,500
+category,amount,name
+monthly dues,1500,test2
+Auto,100,test3
+Auto,500,test3
