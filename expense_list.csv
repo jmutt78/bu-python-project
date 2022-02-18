@@ -1,3 +1,5 @@
-category,name,amount
-tester,test,3241234
-tester,test2,324234
+name,amount,category
+2,1500,213
+test2,1500,monthly dues
+test3,100,Auto
+test3,500,Auto
