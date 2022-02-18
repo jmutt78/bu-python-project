@@ -39,12 +39,13 @@ class Expenses_analyzer:
                        'category': expense_category, 'amount': expense_amount}
             self.expenses.append(expense)
 
-            choice = int(
-                input('Enter 1 to add more expenses or 0 to exit -->'))
-            if choice == 0:
+            choice = input(
+                'Enter 1 to add more expenses or any other key to exit -->')
+            if choice != '1':
                 break
 
     # To create file expenses file
+
     def __create_all_expenses_file(self):
         csv_columns = {'category', 'name', 'amount'}
         with open("expense_list.csv", "w") as expense_file:
