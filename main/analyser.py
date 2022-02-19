@@ -124,7 +124,7 @@ class Expenses_analyzer:
             self.__create_all_expenses_file()
 
             # create a file of the total by category and income
-            with open('total_by_category.csv', 'w') as csv_file:
+            with open('expense_report.csv', 'w') as csv_file:
                 writer = csv.writer(csv_file)
                 for key, value in total_by_category.items():
                     writer.writerow([key, value])

@@ -1,9 +1,4 @@
-name,amount,category
-test2,1500,monthly dues
-test3,100,Auto
-test3,500,Auto
-test2,1500,monthly dues
-test3,100,Auto
-test3,500,Auto
-test,123121,me
-Auto,123123123,Auto
+name,category,amount
+test2,monthly dues,1500
+test3,Auto,100
+test3,Auto,500
