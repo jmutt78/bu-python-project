@@ -113,6 +113,7 @@ class Expenses_analyzer:
 
             # calculate the difference between the total and the expenses
             self.__expense_difference = self.income - self.__total_expenses
+            self.__expense_difference = self.__sub__()
 
             # add the difference, total and income to the total_by_category dictionary
             total_by_category['Total'] = self.__total_expenses
@@ -140,11 +141,10 @@ class Expenses_analyzer:
         self.expenses = []
         print("Success! Your expenses have been reset.")
 
-    # if two objects of the this class are added using '+' sign like 'A + B' then the expenses list of A is extended by
-    # expenses list of B
-    def __add__(self, other):
-        return self.expenses.append(other.expenses)
+    def __sub__(self):
+        return (self.income - self.__total_expenses)
 
     # returns about of class
+
     def __str__(self):
         return f'Income: {self.income}\nTotal Expenses: {self.__total_expenses}\nExpenses Difference: {self.__expense_difference}'
