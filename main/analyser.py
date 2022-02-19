@@ -144,7 +144,10 @@ class Expenses_analyzer:
     def __sub__(self):
         return (self.income - self.__total_expenses)
 
-    # returns about of class
+    # A and B are objects of class and A has expenses = [1, 2, 3], B has expenses = [4, 5, 6] then A + B will return [1, 2, 3, 4, 5, 6]
+    def __add__(self, other):
+        return self.expenses.append(other.expenses)
 
+    # returns about of class
     def __str__(self):
         return f'Income: {self.income}\nTotal Expenses: {self.__total_expenses}\nExpenses Difference: {self.__expense_difference}'
