@@ -1,9 +1,9 @@
-from analyser import Expenses_analyzer
+from analyser import ExpensesAnalyzer
 
 if __name__ == '__main__':
     # creating object of expenses_analyser class
     # if the income value given to __init__ if not given it will take input
-    analyser_obj = Expenses_analyzer()
+    analyser_obj = ExpensesAnalyzer()
     while True:
         option_1 = 'Enter 1 to add expense details'
         option_2 = 'Enter 2 to upload a cvs file'

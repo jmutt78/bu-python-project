@@ -1,13 +1,13 @@
 import unittest
-from analyser import Expenses_analyzer
+from analyser import ExpensesAnalyzer
 
 
 class Test (unittest.TestCase):
     # setting up class object
-    analyser = Expenses_analyzer(income=10000)
+    analyser = ExpensesAnalyzer(income=10000)
     # call to csv_analyze so that all the calculation are done
     # full path to test.csv needs to be given as input
-    Expenses_analyzer.csv_analyze(analyser)
+    ExpensesAnalyzer.csv_analyze(analyser)
 
     # Test case 1 to test analyze_expenses function
     def test_analyze_expenses(self):

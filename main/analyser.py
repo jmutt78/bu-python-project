@@ -2,7 +2,7 @@ import csv
 import os
 
 
-class Expenses_analyzer:
+class ExpensesAnalyzer:
     def __init__(self, income=None):
         self.__total_expenses = 0
         self.expenses = []
