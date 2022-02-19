@@ -2,7 +2,7 @@ from analyser import Expenses_analyzer
 
 if __name__ == '__main__':
     # creating object of expenses_analyser class
-    # income value given to __init__ if not given it will take input
+    # if the income value given to __init__ if not given it will take input
     analyser_obj = Expenses_analyzer()
     while True:
         option_1 = 'Enter 1 to add expense details'
