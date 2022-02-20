@@ -156,7 +156,8 @@ class ExpensesAnalyzer:
                 csv_file.close()
 
             print(
-                'Success! Your expenses have analyzed.\nCheck your files for more information.')
+                f'Success! Your expenses have analyzed.\nCheck your files for more information.\nHere is your breakdown:\n{self.__str__()}\n')
+
         else:
             print("No expenses to analyze")
 
