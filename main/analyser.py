@@ -36,7 +36,6 @@ class ExpensesAnalyzer:
 
     def __get_input(self, question):
         """ For taking input of positive integers.
-
         Args:
             question (str): question to be asked.
         """
@@ -78,7 +77,6 @@ class ExpensesAnalyzer:
             dict_writer.writeheader()
             dict_writer.writerows(self.expenses)
 
-    # setter for private variable
     def set_expense_difference(self, value):
         """ For setting the __expense_difference private variable.
         Args:
