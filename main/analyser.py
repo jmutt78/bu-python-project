@@ -3,6 +3,28 @@ import os
 
 
 class ExpensesAnalyzer:
+    """ Class to represent an ExpensesAnalyzer
+
+    Attributes:
+        __total_expenses (int): total expenses.
+        expenses (list): list of expenses.
+        __expense_difference (int): difference between income and expenses.
+        income (int): income. If the argument is not given, it will be taken from user input.
+
+    Methods:
+        __get_input: For taking input of positive integers.
+        gather_exp: For gathering expenses.
+        csv_analyze: For reading csv file and adding to expenses.
+        analyze_expenses: For generating expense report.
+        reset: For resetting expenses.
+        __create_all_expenses_file: For creating a file of all expenses.
+        __str__: For printing the object.
+        __sub__: For calculating the difference between income and expenses.
+        __add__: For adding two ExpensesAnalyzers.
+        set_expense_difference: For setting the __expense_difference private variable.
+        get_expense_difference: For getting the __expense_difference private variable.
+    """
+
     def __init__(self, income=None):
         self.__total_expenses = 0
         self.expenses = []
@@ -12,8 +34,12 @@ class ExpensesAnalyzer:
         else:
             self.income = income
 
-    # for taking input of positive integers
     def __get_input(self, question):
+        """ For taking input of positive integers.
+
+        Args:
+            question (str): question to be asked.
+        """
         while True:
             try:
                 number = int(input(question))
@@ -45,7 +71,6 @@ class ExpensesAnalyzer:
             else:
                 break
 
-    # To create file expenses file
     def __create_all_expenses_file(self):
         csv_columns = {'category', 'name', 'amount'}
         with open("expense_list.csv", "w") as expense_file:
@@ -55,13 +80,15 @@ class ExpensesAnalyzer:
 
     # setter for private variable
     def set_expense_difference(self, value):
+        """ For setting the __expense_difference private variable.
+        Args:
+            value (int): value to be set.
+        """
         self.__expense_difference = value
 
-    # getter for private variable
     def get_expense_difference(self):
         return self.__expense_difference
 
-    # reads file and try to convert amount column to integer and then adds to expenses
     def csv_analyze(self):
         filepath = input("Please enter filepath: ")
 
@@ -70,7 +97,7 @@ class ExpensesAnalyzer:
             with open(filepath, mode='r', encoding='utf-8-sig') as file_in:
                 csv_columns = ['category', 'name', 'amount']
                 reader = csv.DictReader(file_in)
-                csv_dict = list(reader)
+                csv_dict = tuple(reader)
                 headers = reader.fieldnames
                 try:
                     for i in csv_dict:
@@ -148,6 +175,5 @@ class ExpensesAnalyzer:
     def __add__(self, other):
         return self.expenses.append(other.expenses)
 
-    # returns about of class
     def __str__(self):
         return f'Income: {self.income}\nTotal Expenses: {self.__total_expenses}\nExpenses Difference: {self.__expense_difference}'
