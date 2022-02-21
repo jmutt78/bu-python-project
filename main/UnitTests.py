@@ -1,5 +1,5 @@
 import unittest
-from analyser import ExpensesAnalyzer
+from ExpensesAnalyzer import ExpensesAnalyzer
 
 
 class Test (unittest.TestCase):
@@ -15,11 +15,13 @@ class Test (unittest.TestCase):
     # full path to test.csv needs to be given as input
     ExpensesAnalyzer.csv_analyze(analyser)
 
+    # unit test 1 for analyze_expenses function
     def test_analyze_expenses(self):
         result = self.analyser.analyze_expenses()
         self.assertEqual(
             result, 'Income: 10000\nTotal Expenses: 2100\nExpenses Difference: 7900')
 
+    # unit test 2 for reset function
     def test_reset(self):
         self.analyser.reset()
         self.assertEqual(self.analyser.expenses, [])
