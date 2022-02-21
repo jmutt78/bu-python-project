@@ -21,8 +21,6 @@ class ExpensesAnalyzer:
         __str__: For printing the object.
         __sub__: For calculating the difference between income and expenses.
         __add__: For adding two ExpensesAnalyzers.
-        set_expense_difference: For setting the __expense_difference private variable.
-        get_expense_difference: For getting the __expense_difference private variable.
     """
 
     # init method
@@ -55,6 +53,9 @@ class ExpensesAnalyzer:
         return number
 
     def get_income(self):
+        '''
+        For takeing input of positive integers. Private method.
+        '''
         income = self.__get_input("Please enter your monthly income: ")
         return income
 
@@ -75,24 +76,20 @@ class ExpensesAnalyzer:
 
     # private method and output file
     def __create_all_expenses_file(self):
+        '''
+        For creating a file of all expenses. Private method.
+        '''
         csv_columns = {'category', 'name', 'amount'}  # set
         with open("expense_list.csv", "w") as expense_file:
             dict_writer = csv.DictWriter(expense_file, csv_columns)
             dict_writer.writeheader()
             dict_writer.writerows(self.expenses)
 
-    def set_expense_difference(self, value):
-        """
-        Args:
-            value (int): value to be set.
-        """
-        self.__expense_difference = value
-
-    def get_expense_difference(self):
-        return self.__expense_difference
-
     # input file
     def csv_analyze(self):
+        '''
+        For reading csv file and adding to expenses.
+        '''
         filepath = input("Please enter filepath: ")
 
         # check if file exist and throw an error if it does not
@@ -128,6 +125,9 @@ class ExpensesAnalyzer:
         return True
 
     def analyze_expenses(self):
+        '''
+        For generating expense report.
+        '''
         if len(self.expenses):
             # create a dictionary of categories and the total amount
             total_by_category = {}  # dictionary
@@ -172,6 +172,9 @@ class ExpensesAnalyzer:
         return self.__str__()
 
     def reset(self):
+        '''
+        For resetting the expenses.
+        '''
         self.expenses = []
         print("Success! Your expenses have been reset.")
 
@@ -179,8 +182,8 @@ class ExpensesAnalyzer:
     def __sub__(self):
         return (self.income - self.__total_expenses)
 
-    # A and B are objects of class and A has expenses = [1, 2, 3], B has expenses = [4, 5, 6] then A + B will return [1, 2, 3, 4, 5, 6]
     # magic method
+
     def __add__(self, other):
         return self.expenses.append(other.expenses)
 

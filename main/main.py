@@ -1,3 +1,23 @@
+"""
+Justin McIntosh
+Class: CS 521 - Spring 1
+Date: 2/25/2022
+Term Project
+
+Runing the program:
+* Run the application from main.py.
+* When prompted, enter your income. Alternatively, you add your income as a argument.
+  * EG: analyser_obj = Expenses_analyzer(income=10000)
+* Choose the option that you want to perform. 
+* To Close the application choose option 5.
+* Note: If you want to upload a csv file, the file must be in the root directory of the project.
+
+Unit Testing:
+Run the application from UnitTests.py
+You must use the test.csv file to test the application.
+"""
+
+
 from ExpensesAnalyzer import ExpensesAnalyzer
 
 if __name__ == '__main__':
@@ -10,13 +30,13 @@ if __name__ == '__main__':
         while True:
             try:
                 number = int(input(question))
-                if number <= 1 or number >= 5:
+                if number <= 0 or number >= 6:
                     raise ValueError
                 break
             except ValueError:
                 print("Thats not a valid option. Try again: ")
         return number
-
+    # try except block
     while True:
         option_1 = 'Enter 1 to add expense details'
         option_2 = 'Enter 2 to upload a cvs file'
